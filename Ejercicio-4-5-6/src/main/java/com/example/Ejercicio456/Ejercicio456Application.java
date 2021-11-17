@@ -17,8 +17,10 @@ public class Ejercicio456Application {
 		// Creamos un lapto
 
 		Laptop laptop1 = new Laptop(null,"Toshiba","567hx46",4,"Windows 11");
+		Laptop laptop2 = new Laptop(null,"Lenovo","85ki365",8,"Windows 11");
 		repository.save(laptop1);
-		System.out.println(repository.findAll());
+		repository.save(laptop2);
+
 	}
 
 }
