@@ -1,9 +1,14 @@
 package com.example.ejercicio789.entities;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="laptops")
 public class Laptop {
 
     // atributos
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String manufacture;
     private String model;
