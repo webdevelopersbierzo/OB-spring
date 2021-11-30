@@ -3,11 +3,11 @@ package com.example.ejercicio789.controller;
 
 import com.example.ejercicio789.entities.Laptop;
 import com.example.ejercicio789.repository.LaptopRepository;
-import org.hibernate.annotations.Parameter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +16,7 @@ public class LaptopController {
     // Atributos
 
     private LaptopRepository laptopRepository;
+    private final Logger log = LoggerFactory.getLogger(LaptopController.class);
     // constructores
     public LaptopController(LaptopRepository laptopRepository) {
         this.laptopRepository = laptopRepository;
@@ -53,5 +54,26 @@ public class LaptopController {
         else{
             return ResponseEntity.notFound().build();
         }
+    }
+    // Actualizar un Laptop existente
+
+    /**
+     * Actualidar un laptop por json
+     * @param laptop
+     * @return
+     */
+    @PutMapping("/api/laptop")
+    public ResponseEntity<Laptop> update(@RequestBody Laptop laptop){
+        if(laptop.getId() == null){ // si no existe
+            log.warn ("trying to update a non existent laptop");
+            return ResponseEntity.badRequest().build();
+        }
+        if(!laptopRepository.existsById(laptop.getId())){
+            log.warn("trying  to update a non existent laptop");
+            return ResponseEntity.notFound().build();
+        }
+        Laptop result = laptopRepository.save(laptop);
+        return ResponseEntity.ok(result);
+
     }
 }
