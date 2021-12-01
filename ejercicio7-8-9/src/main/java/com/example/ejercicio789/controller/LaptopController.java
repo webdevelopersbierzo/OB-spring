@@ -76,4 +76,15 @@ public class LaptopController {
         return ResponseEntity.ok(result);
 
     }
+
+    /**
+     *  Borrar un laptop de la base de datos
+     *  @return
+     */
+    @DeleteMapping("/api/laptop")
+    public ResponseEntity<Laptop> deleteAll(){
+        log.warn("REST request for delete laptop all");
+        laptopRepository.deleteAll();
+        return ResponseEntity.noContent().build();
+    }
 }
