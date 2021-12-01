@@ -87,4 +87,19 @@ public class LaptopController {
         laptopRepository.deleteAll();
         return ResponseEntity.noContent().build();
     }
+
+    /**
+     * Borra un laptop de la base de datos
+     * @param id numero de resgistro en base de datos
+     * @return ResponseEntity
+     */
+    @DeleteMapping("/api/laptop/{id}")
+    public ResponseEntity<Laptop> deleteOneById(@PathVariable Long id){
+        if(!laptopRepository.existsById(id)){
+            log.warn("trying to update a non existent laptop");
+            return ResponseEntity.notFound().build();
+        }
+        laptopRepository.deleteById(id);;
+        return ResponseEntity.ok().build();
+    }
 }
