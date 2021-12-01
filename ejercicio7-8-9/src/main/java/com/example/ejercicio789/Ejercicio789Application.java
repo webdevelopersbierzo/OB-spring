@@ -1,12 +1,17 @@
 package com.example.ejercicio789;
 
+import com.example.ejercicio789.controller.LaptopController;
 import com.example.ejercicio789.entities.Laptop;
 import com.example.ejercicio789.repository.LaptopRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
+@EnableSwagger2
+@ComponentScan(basePackageClasses = LaptopController.class)
 public class Ejercicio789Application {
 
 	public static void main(String[] args) {

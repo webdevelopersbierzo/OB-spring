@@ -3,10 +3,13 @@ package com.example.ejercicio789.controller;
 
 import com.example.ejercicio789.entities.Laptop;
 import com.example.ejercicio789.repository.LaptopRepository;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 import java.util.Optional;
@@ -46,7 +49,8 @@ public class LaptopController {
      * @return ResponseEntity
      */
     @GetMapping("/api/laptop/{id}")
-    public ResponseEntity<Laptop> findOneById(@PathVariable Long id){
+    @ApiOperation("Buscar un libro por clave primaria id Long")
+    public ResponseEntity<Laptop> findOneById(@ApiParam("Clave primaria tipo Long") @PathVariable Long id){
         Optional<Laptop> laptopOpt =  laptopRepository.findById(id);
         if(laptopOpt.isPresent()){
             return ResponseEntity.ok(laptopOpt.get());
@@ -81,6 +85,7 @@ public class LaptopController {
      *  Borrar un laptop de la base de datos
      *  @return
      */
+    @ApiIgnore
     @DeleteMapping("/api/laptop")
     public ResponseEntity<Laptop> deleteAll(){
         log.warn("REST request for delete laptop all");
