@@ -48,7 +48,27 @@ class LaptopControllerTest {
 
     @Test
     void create() {
-      
+        // preparacion minima para enviar cabeceras json
+        HttpHeaders headers = new HttpHeaders(); // Enviamos las cabeceras
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+
+        String json = """
+                {
+                    "manufacture": "test",
+                    "model": "458hm95",
+                    "price": 485.5,
+                    "touch": true
+                }
+                """;
+        // pasamos la request
+        HttpEntity<String> request = new HttpEntity<>(json,headers); // creamos la peticion json
+        // ejecutamos la peticion
+        ResponseEntity<Laptop> response =
+                testRestTemplate.exchange("/api/books", HttpMethod.POST, request, Laptop.class);
+
+        Laptop result = response.getBody();
+    }
 
     @Test
     void findOneById() {
