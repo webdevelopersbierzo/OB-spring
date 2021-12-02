@@ -42,8 +42,6 @@ class LaptopControllerTest {
         List<Laptop> laptops = Arrays.asList(response.getBody());
         System.out.println(laptops.size());
 
-
-
     }
 
     @Test
@@ -69,9 +67,16 @@ class LaptopControllerTest {
 
         Laptop result = response.getBody();
     }
-
+/*
     @Test
     void findOneById() {
+        ResponseEntity<Laptop[]> response =
+            testRestTemplate.getForEntity("/api/laptop/32", Laptop[].class);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(200,response.getBody());
+        assertEquals(32,response.getBody());
+
     }
 
     @Test
@@ -84,5 +89,5 @@ class LaptopControllerTest {
 
     @Test
     void deleteOneById() {
-    }
+    }*/
 }
