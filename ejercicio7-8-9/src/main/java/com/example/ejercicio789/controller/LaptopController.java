@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
@@ -16,6 +17,9 @@ import java.util.Optional;
 
 @RestController
 public class LaptopController {
+
+    @Value("${app.message}")
+    String message;
     // Atributos
 
     private LaptopRepository laptopRepository;
@@ -27,7 +31,10 @@ public class LaptopController {
 
     // BUSCAR TODOS LOS LAPTOP
     @GetMapping("/api/laptops")
+
     public List<Laptop> findAll(){
+
+        System.out.println(message);
         return laptopRepository.findAll();
     }
     // GUARDAR UN LAPTOP
